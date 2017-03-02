@@ -20,6 +20,12 @@ new Vue({
 			}
 		},
 		specialAttack: function () {
+			this.playerHealth -= _.random(5, 12);
+			this.monsterHealth -= _.random(10, 20);
+
+			if (this.checkWin()){
+				return;
+			}
 			
 		},
 		heal: function () {
@@ -31,7 +37,7 @@ new Vue({
 		checkWin: function () {
 			var message = '';
 
-			if (this.playerHealth === 0 && this.monsterHealth === 0) {
+			if (this.playerHealth <= 0 && this.monsterHealth <= 0) {
 				message = 'It\'s a tie...';
 			}
 			if (this.playerHealth <= 0) {
@@ -49,9 +55,9 @@ new Vue({
 					this.gameIsRunning = false; // game over
 				}
 				return true;
-			} else {
-				return false;
 			}
+			
+			return false;
 		}
 	}
 });
