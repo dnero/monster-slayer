@@ -15,19 +15,7 @@ new Vue({
 			this.playerHealth -= _.random(5, 12);
 			this.monsterHealth -= _.random(3, 10);
 
-			if ( this.playerHealth === 0 && this.monsterHealth === 0 ) {
-				alert('tie game');
-				this.gameIsRunning = false; // game over
-				return;
-			}
-			if( this.playerHealth <= 0 ) {
-				alert('you lose');
-				this.gameIsRunning = false;
-				return;
-			}
-			if( this.monsterHealth <= 0 ) {
-				alert('you win');
-				this.gameIsRunning = false;
+			if (this.checkWin()){
 				return;
 			}
 		},
@@ -40,5 +28,30 @@ new Vue({
 		giveUp: function () {
 
 		},
+		checkWin: function () {
+			var message = '';
+
+			if (this.playerHealth === 0 && this.monsterHealth === 0) {
+				message = 'It\'s a tie...';
+			}
+			if (this.playerHealth <= 0) {
+				message = 'You lose!'
+			}
+			if(this.monsterHealth <= 0) {
+				message = 'You win!'
+			}
+
+			// if there's a game-ending message
+			if (message) {
+				if (confirm(message + ' Play again?')) {
+					this.startGame();
+				} else {
+					this.gameIsRunning = false; // game over
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 });
