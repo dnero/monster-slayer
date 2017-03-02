@@ -29,7 +29,12 @@ new Vue({
 			
 		},
 		heal: function () {
-
+			// heal by 10
+			this.playerHealth = _.clamp(this.playerHealth + 10, 0, 100);
+			this.playerHealth -= _.random(5, 12);
+			if (this.checkWin()){
+				return;
+			}
 		},
 		giveUp: function () {
 
