@@ -11,34 +11,35 @@ new Vue({
 			this.playerHealth = 100;
 			this.monsterHealth = 100;
 		},
-		attack: function () {
-			this.playerHealth -= _.random(5, 12);
-			this.monsterHealth -= _.random(3, 10);
 
-			if (this.checkWin()){
-				return;
-			}
+		attack: function () {
+			this.monsterHealth -= _.random(3, 10);
+			this.attackOnPlayer();
 		},
+
 		specialAttack: function () {
-			this.playerHealth -= _.random(5, 12);
 			this.monsterHealth -= _.random(10, 20);
 
-			if (this.checkWin()){
-				return;
-			}
-			
+			this.attackOnPlayer();
 		},
+		
 		heal: function () {
 			// heal by 10
 			this.playerHealth = _.clamp(this.playerHealth + 10, 0, 100);
+			this.attackOnPlayer();
+		},
+		
+		giveUp: function () {
+
+		},
+
+		attackOnPlayer: function () {
 			this.playerHealth -= _.random(5, 12);
 			if (this.checkWin()){
 				return;
 			}
 		},
-		giveUp: function () {
 
-		},
 		checkWin: function () {
 			var message = '';
 

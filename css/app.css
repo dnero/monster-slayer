@@ -7,7 +7,7 @@
     height: 40px;
     background-color: #eee;
     margin: auto;
-    transition: width 500ms;
+    transition: width 1000ms;
 }
 
 .controls, .log {
